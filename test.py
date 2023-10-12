@@ -1,3 +1,11 @@
+alphabet = dict()
+i = 0
+for lettre in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+    alphabet[lettre] = i
+    i += 1
+
+
+
 def chiffrement_cesar(texte, decalage):
     """
     Cette fonction prend en entrée un texte et un décalage et retourne le texte chiffré
@@ -21,9 +29,23 @@ def chiffrement_cesar(texte, decalage):
     return resultat
 
 
+def test_tous_les_decalage(texte):
+    """
+    Cette fonction prend en entrée un texte et affiche le texte chiffré avec tous les décalages possibles.
+
+    Args:
+        texte (str): Le texte à chiffrer.
+    """
+    for decalage in range(26):
+        print(f"Texte chiffré avec un décalage de {decalage} : {chiffrement_cesar(texte, decalage)}")
+
 
 # Exemple d'utilisation :
 text = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M GZ MDNDQ FAGF DQOAGHQDF P AD ZQ ZQSXUSQ BME XM VQGZQ BAGOQ RQGUXXG SDMZP QEF EAZ EQODQF YMXSDQ EM FMUXXQ YQZGQ DAZPQE QF OAXADQQE EAZF XQE NMUQE CG'UX BADFQ MZUEQQE QF EGODQQE, XQGDE EMHQGDE EAZF RADFQE YMUE MFFQZFUAZ M ZQ BME XQE ODACGQD, YQYQ EU XM RMUY FUDMUXXQ FQE QZFDMUXXQE, QZ MGOGZ OME FG ZQ PAUE EGOOAYNQD"
-shift = 14
-encrypted_text = chiffrement_cesar(text, shift)
+
+mini_texte = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD"
+
+decalage = 14
+encrypted_text = chiffrement_cesar(text, decalage)
+test_tous_les_decalage(mini_texte)
 print(f"Texte chiffré : {encrypted_text}")
