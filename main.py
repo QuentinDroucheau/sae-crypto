@@ -41,9 +41,9 @@ def test_tous_les_decalage(texte):
     for decalage in range(26):
         print(f"Texte chiffré avec un décalage de {decalage} : {dechiffrement_cesar(decalage, texte)}")
 
-# test_tous_les_decalage(mini_texte)
-
-# print(dechiffrement_cesar(14, texte))
+test_tous_les_decalage(mini_texte)
+print("\n\n")
+print(dechiffrement_cesar(14, texte))
 
 
 def decryptage_fichier_cesar(fichier, cle, fichier_sortie):
@@ -61,5 +61,5 @@ def decryptage_fichier_cesar(fichier, cle, fichier_sortie):
     with open(fichier_sortie, "w") as f:
         f.write(texte_decode)
 
-    
+
 decryptage_fichier_cesar("indice1_chiffre.txt", 14, "indice1_dechiffre.txt")
