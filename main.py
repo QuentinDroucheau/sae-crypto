@@ -8,8 +8,18 @@ texte = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M GZ MDNDQ FAGF DQOAGHQDF P 
 mini_texte = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M"
 
 def dechiffrement_cesar(cle, texte):
-    global alphabet
-    texte_decode = ""
+    """
+    Déchiffre un chiffrement de César avec une clé donnée.
+
+    Args:
+        cle (int): La clé utilisée pour déchiffrer le texte.
+        texte (str): Le texte à déchiffrer.
+
+    Returns:
+        str: Le texte déchiffré.
+    """
+    global alphabet  
+    texte_decode = ""  
     for lettre in texte:
         if lettre in alphabet.keys():
             nb = (alphabet.get(lettre) + cle) % 26
@@ -31,6 +41,25 @@ def test_tous_les_decalage(texte):
     for decalage in range(26):
         print(f"Texte chiffré avec un décalage de {decalage} : {dechiffrement_cesar(decalage, texte)}")
 
-test_tous_les_decalage(mini_texte)
+# test_tous_les_decalage(mini_texte)
 
-print(dechiffrement_cesar(14, texte))
+# print(dechiffrement_cesar(14, texte))
+
+
+def decryptage_fichier_cesar(fichier, cle, fichier_sortie):
+    """
+    Cette fonction prend en entrée un fichier et affiche le texte déchiffré avec tous les décalages possibles.
+
+    Args:
+        fichier (str): Le nom du fichier à déchiffrer.
+        cle (int): La clé utilisée pour déchiffrer le texte.
+        fichier_sortie (str): Le nom du fichier de sortie.
+    """
+    with open(fichier, "r") as f:
+        texte = f.read()
+    texte_decode = dechiffrement_cesar(cle, texte)
+    with open(fichier_sortie, "w") as f:
+        f.write(texte_decode)
+
+    
+decryptage_fichier_cesar("indice1_chiffre.txt", 14, "indice1_dechiffre.txt")
