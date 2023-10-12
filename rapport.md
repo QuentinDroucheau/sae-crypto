@@ -26,7 +26,7 @@ for lettre in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
     i += 1
 ```
 
-Par la suite nous avions donc utilise le dictionnaire pour créer la méthode de déchiffrement de césar.
+Par la suite nous avions donc utilisé le dictionnaire pour créer la méthode de déchiffrement de césar.
 
 ```python
 def dechiffrement_cesar(cle, texte):
@@ -68,7 +68,7 @@ def test_tous_les_decalage(texte):
         print(f"Texte chiffré avec un décalage de {decalage} : {dechiffrement_cesar(decalage, texte)}")
 ```
 
-Pour plus de visibilité dans le termina nous avions testé sur un mini texte et c'est ainsi qu'on a vu que le décalage était de 14.
+Pour plus de visibilité dans le terminal nous avions testé sur un mini texte et c'est ainsi qu'on a vu que le décalage était de 14.
 
 ```python
 texte = "BDQE PG OTQYUZ EQ OMOTQ GZ FDQEAD MOODAOTQ M GZ MDNDQ FAGF DQOAGHQDF P AD ZQ ZQSXUSQ BME XM VQGZQ BAGOQ RQGUXXG SDMZP QEF EAZ EQODQF YMXSDQ EM FMUXXQ YQZGQ DAZPQE QF OAXADQQE EAZF XQE NMUQE CG'UX BADFQ MZUEQQE QF EGODQQE, XQGDE EMHQGDE EAZF RADFQE YMUE MFFQZFUAZ M ZQ BME XQE ODACGQD, YQYQ EU XM RMUY FUDMUXXQ FQE QZFDMUXXQE, QZ MGOGZ OME FG ZQ PAUE EGOOAYNQD"
@@ -78,10 +78,10 @@ test_tous_les_decalage(mini_texte)
 print(dechiffrement_cesar(14, texte))
 ```
 
-Afin d'exploiter le fichier txt donnée dans le sujet nous avions une fonction pour passer du fichier crypté en un fichier décrypté.
+Afin d'exploiter le fichier txt donnée dans le sujet nous avons une fonction pour passer du fichier chiffré en un fichier déchiffré.
 
 ```python
-def decryptage_fichier_cesar(fichier, cle, fichier_sortie):
+def dechiffrer_fichier_cesar(fichier, cle, fichier_sortie):
     """
     Cette fonction prend en entrée un fichier et affiche le texte déchiffré avec tous les décalages possibles.
 
@@ -97,5 +97,19 @@ def decryptage_fichier_cesar(fichier, cle, fichier_sortie):
         f.write(texte_decode)
 
     
-decryptage_fichier_cesar("indice1_chiffre.txt", 14, "indice1_dechiffre.txt")
+dechiffrer_fichier_cesar("indice1_chiffre.txt", 14, "indice1_dechiffre.txt")
+```
+
+Message trouvé :
+
+```
+PRES DU CHEMIN SE CACHE UN TRESOR
+ACCROCHE A UN ARBRE TOUT RECOUVERT D'OR
+NE NEGLIGE PAS LA JEUNE POUCE FEUILLU
+GRAND EST SON SECRET MALGRE SA TAILLE MENUE
+RONDES ET COLOREES SONT LES BAIES QU'IL PORTE
+ANISEES ET SUCREES, LEURS SAVEURS SONT FORTES.
+MAIS ATTENTION A NE PAS LES CROQUER,
+MEME SI LA FAIM TIRAILLE TES ENTRAILLES,
+EN AUCUN CAS TU NE DOIS SUCCOMBER
 ```

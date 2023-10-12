@@ -1,0 +1,10 @@
+vernam
+vigenere 
+permutation 
+subti
+rsa 
+cesar
+ECB
+meet in the middle
+el gamal 
+diffie heldman

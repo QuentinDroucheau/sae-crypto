@@ -46,7 +46,7 @@ print("\n\n")
 print(dechiffrement_cesar(14, texte))
 
 
-def decryptage_fichier_cesar(fichier, cle, fichier_sortie):
+def dechiffrer_fichier_cesar(fichier, cle, fichier_sortie):
     """
     Cette fonction prend en entrée un fichier et affiche le texte déchiffré avec tous les décalages possibles.
 
@@ -62,4 +62,4 @@ def decryptage_fichier_cesar(fichier, cle, fichier_sortie):
         f.write(texte_decode)
 
 
-decryptage_fichier_cesar("indice1_chiffre.txt", 14, "indice1_dechiffre.txt")
+dechiffrer_fichier_cesar("indice1_chiffre.txt", 14, "indice1_dechiffre.txt")
