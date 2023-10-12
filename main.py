@@ -41,9 +41,9 @@ def test_tous_les_decalage(texte):
     for decalage in range(26):
         print(f"Texte chiffré avec un décalage de {decalage} : {dechiffrement_cesar(decalage, texte)}")
 
-test_tous_les_decalage(mini_texte)
-print("\n\n")
-print(dechiffrement_cesar(14, texte))
+# test_tous_les_decalage(mini_texte)
+# print("\n\n")
+# print(dechiffrement_cesar(14, texte))
 
 
 def dechiffrer_fichier_cesar(fichier, cle, fichier_sortie):
@@ -62,4 +62,37 @@ def dechiffrer_fichier_cesar(fichier, cle, fichier_sortie):
         f.write(texte_decode)
 
 
-dechiffrer_fichier_cesar("indice1_chiffre.txt", 14, "indice1_dechiffre.txt")
+#dechiffrer_fichier_cesar("indice1_chiffre.txt", 14, "indice1_dechiffre.txt")
+
+
+nouveau_message = "AE IOW ZQBLXR WASIXQ WJR YKJ KGYUJAGY UU OXSLN TXRCUQYM IY IRCTQ HPNF RR RQBIIIGOFN XQ WTCEKK DQ OIH MHXDUDQW BAYNVUDQYM NR MRRPQD SU CXVMUQV HOHLWLQ CYT LRY GRQYMTRRY RPBMVXTVUES QF EXNFO UEHAMAEM RV MQEWPGR IRCTQ HTREOVRQ XE HUOYKIFGXXOA"
+
+def dechiffrement_vigenere(cle, texte):
+    """
+    Déchiffre un chiffrement de Vigenère avec une clé donnée.
+
+    Args:
+        cle (str): La clé utilisée pour déchiffrer le texte.
+        texte (str): Le texte à déchiffrer.
+
+    Returns:
+        str: Le texte déchiffré.
+    """
+    global alphabet
+    texte_decode = ""
+    i = 0
+    for lettre in texte:
+        if lettre in alphabet.keys():
+            nb = (alphabet.get(lettre) - alphabet.get(cle[i])) % 26
+            for k in alphabet.keys():
+                if alphabet[k] == nb:
+                    texte_decode += k
+            i += 1
+            if i == len(cle):
+                i = 0
+        else:
+            texte_decode += lettre
+    return texte_decode
+
+
+print(dechiffrement_vigenere("PANGRAMME", nouveau_message))
