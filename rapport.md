@@ -113,3 +113,9 @@ MAIS ATTENTION A NE PAS LES CROQUER,
 MEME SI LA FAIM TIRAILLE TES ENTRAILLES,
 EN AUCUN CAS TU NE DOIS SUCCOMBER
 ```
+
+Le code caché dans le message est le suivant en prennat les premières lettres de chaque ligne :
+
+```
+PANGRAMME
+```
