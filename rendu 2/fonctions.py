@@ -12,7 +12,7 @@ def convertir_texte_ascii(fichier):
             texte_ascii.append(ord(texte[i]))
     return texte_ascii
 
-convertir_texte_ascii("lettres_persanes.txt")
+# convertir_texte_ascii("lettres_persanes.txt")
 
 def ascii_to_texte(texte_ascii):
     texte = ""
@@ -23,7 +23,7 @@ def ascii_to_texte(texte_ascii):
             texte += chr(texte_ascii[i])
     return texte
 
-print(ascii_to_texte(convertir_texte_ascii("lettres_persanes.txt")))
+# print(ascii_to_texte(convertir_texte_ascii("lettres_persanes.txt")))
 
 def ascii_to_binaire(texte_ascii):
     texte_binaire = []
@@ -31,7 +31,7 @@ def ascii_to_binaire(texte_ascii):
         texte_binaire.append(bin(texte_ascii[i])[2:].zfill(8))
     return texte_binaire
 
-print(ascii_to_binaire(convertir_texte_ascii("lettres_persanes.txt")))
+# print(ascii_to_binaire(convertir_texte_ascii("lettres_persanes.txt")))
 
 def binaire_to_ascii(texte_binaire):
     texte_ascii = []
@@ -39,6 +39,18 @@ def binaire_to_ascii(texte_binaire):
         texte_ascii.append(int(texte_binaire[i],2))
     return texte_ascii
 
-print(binaire_to_ascii(ascii_to_binaire(convertir_texte_ascii("lettres_persanes.txt"))))
+# print(binaire_to_ascii(ascii_to_binaire(convertir_texte_ascii("lettres_persanes.txt"))))
 
-print(ascii_to_texte(binaire_to_ascii(ascii_to_binaire(convertir_texte_ascii("lettres_persanes.txt")))))
+# print(ascii_to_texte(binaire_to_ascii(ascii_to_binaire(convertir_texte_ascii("lettres_persanes.txt")))))
+
+key = 1011110101
+
+def chiffrer_fichier(fichier, key):
+    texte_ascii = convertir_texte_ascii(fichier)
+    texte_binaire = ascii_to_binaire(texte_ascii)
+    texte_chiffre = []
+    for i in range(len(texte_binaire)):
+        texte_chiffre.append(encrypt(key, int(texte_binaire[i])))
+    return texte_chiffre
+
+print(chiffrer_fichier("lettres_persanes.txt", key))
