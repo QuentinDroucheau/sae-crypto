@@ -141,3 +141,4 @@ if __name__ == '__main__':
     print(crypt)
     print(decrypt(key, decrypt(key, crypt)))
     exit()
+
