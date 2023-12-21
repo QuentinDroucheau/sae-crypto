@@ -94,10 +94,12 @@ def cassage_brutal_simple(message_clair, message_chiffre):
     return None
 
 # Exemple d'utilisation de la fonction cassage_brutal
-# message_clair = "Bonjour, ceci est un exemple de texte à chiffrer avec SDES."
-# key = 0b1011110111
-# message_chiffre = chiffrer_texte(message_clair, key)
-# print(cassage_brutal_simple(message_clair, message_chiffre))
+message_clair = "Bonjour, ceci est un exemple de texte à chiffrer avec SDES."
+key = 0b1011110111
+message_chiffre = chiffrer_texte(message_clair, key)
+key = cassage_brutal_simple(message_clair, message_chiffre)
+
+print(dechiffrer_texte(message_chiffre, key))
 
 
 def cassage_brutal_double(message_clair, message_chiffre):
@@ -116,9 +118,9 @@ def cassage_brutal_double(message_clair, message_chiffre):
     return None
 
 # Exemple d'utilisation de la fonction cassage_brutal
-message_clair = "Bonjour, ceci est un exemple de texte à chiffrer avec SDES."
-key  = 0b1011110111
-key1 = 0b1011000111
-message_chiffre = chiffrer_texte(message_clair, key)
-message_chiffre_double = chiffrer_texte(message_chiffre, key1)
-print(cassage_brutal_double(message_clair, message_chiffre_double))
+# message_clair = "Bonjour, ceci est un exemple de texte à chiffrer avec SDES."
+# key  = 0b1011110111
+# key1 = 0b1011000111
+# message_chiffre = chiffrer_texte(message_clair, key)
+# message_chiffre_double = chiffrer_texte(message_chiffre, key1)
+# print(cassage_brutal_double(message_clair, message_chiffre_double))
