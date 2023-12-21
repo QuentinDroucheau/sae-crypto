@@ -24,21 +24,15 @@ def dechiffre_message(message, key):
 def cassage_brutal_simple(message_clair, message_chiffre):
     for i in range(1024):
         key = bin(i)[2:].zfill(10)
-        texte_dechiffre = dechiffre_message(message_chiffre, int(key, 2))
+        texte_dechiffre = dechiffre_message(message_chiffre, int(key))
         if texte_dechiffre == message_clair:
             return key
     return None
 
 key = 1011110101
 
-m = bin(757)[2:].zfill(10)
-print(int(m, 2))
-
-
 message = fichier_to_texte("texte.txt")
 chiffre = chiffre_message(message, key)
 # print(dechiffre_message(chiffre, key))
 
-# print(chiffre_message(message, m))
-
-# print(cassage_brutal_simple(message, chiffre))
+print(cassage_brutal_simple(message, chiffre))
