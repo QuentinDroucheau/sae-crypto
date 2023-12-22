@@ -1,53 +1,83 @@
-import cryptography
-from cryptography.fernet import Fernet
-from PIL import Image
+from image_traitement import extraire_cle
 
-def compare_images(image_path1, image_path2):
-    img1 = Image.open(image_path1)
-    img2 = Image.open(image_path2)
+def cryptage_aes(message, key):
+    """
+    Crypte le message spécifié avec la clé spécifiée en utilisant l'algorithme AES.
 
-    if img1.size != img2.size or img1.mode != img2.mode:
-        return "Les images sont de tailles ou de modes différents."
+    Paramètres :
+    - message (str) : Le message à crypter.
+    - key (str) : La clé à utiliser pour le cryptage.
 
-    diff_pixels = []
-    width, height = img1.size
-    cpt = 0
+    Retourne :
+    - str : Le message crypté.
+    """
 
-    for y in range(height):
-        for x in range(width):
-            pixel1 = img1.getpixel((x, y))
-            pixel2 = img2.getpixel((x, y))
+    # Initialiser la variable pour stocker le message crypté
+    message_crypte = ""
 
-            if pixel1 != pixel2:
-                if pixel1 - pixel2 > 0:
-                    diff_pixels.append(1)
-                else:
-                    diff_pixels.append(0)
-            cpt+=1
+    # Parcourir les caractères du message
+    for i in range(len(message)):
+        # Convertir le caractère en binaire
+        caractere_binaire = format(ord(message[i]), '08b')
 
-    return diff_pixels
+        # Parcourir les bits du caractère binaire
+        for j in range(len(caractere_binaire)):
+            # Crypter le bit du caractère avec le bit correspondant de la clé
+            bit_crypte = str(int(caractere_binaire[j]) ^ int(key[j]))
 
-def aes_encrypt(message, key):
-    cipher = Fernet(key)
-    encrypted_message = cipher.encrypt(message.encode())
-    return encrypted_message
+            # Ajouter le bit crypté au message crypté
+            message_crypte += bit_crypte
 
-def aes_decrypt(encrypted_message, key):
-    cipher = Fernet(key)
-    decrypted_message = cipher.decrypt(encrypted_message)
-    return decrypted_message.decode()
+    # Retourner le message crypté
+    return message_crypte
 
 
+def decrytpage_aes(message,key):
+    """
+    Décrypte le message spécifié avec la clé spécifiée en utilisant l'algorithme AES.
 
-message = "Hello World !"
-key = Fernet.generate_key()
-encrypted_message = aes_encrypt(message, key)
-decrypted_message = aes_decrypt(encrypted_message, key)
+    Paramètres :
+    - message (str) : Le message à décrypter.
+    - key (str) : La clé à utiliser pour le décryptage.
 
-print("Message: ", message)
-print("Key: ", key)
-print("Encrypted message: ", encrypted_message)
-print("Decrypted message: ", decrypted_message)
-print("Message == Decrypted message: ", message == decrypted_message)
+    Retourne :
+    - str : Le message décrypté.
+    """
+
+    # Initialiser la variable pour stocker le message décrypté
+    message_decrypte = ""
+
+    # Parcourir les caractères du message
+    for i in range(len(message) // 8):
+        # Initialiser la variable pour stocker le caractère en binaire
+        caractere_binaire = ""
+
+        # Parcourir les bits du caractère
+        for j in range(8):
+            # Décrypter le bit du caractère avec le bit correspondant de la clé
+            bit_decrypte = str(int(message[i * 8 + j]) ^ int(key[j]))
+
+            # Ajouter le bit décrypté au caractère binaire
+            caractere_binaire += bit_decrypte
+
+        # Convertir le caractère binaire en caractère ASCII
+        caractere_ascii = chr(int(caractere_binaire, 2))
+
+        # Ajouter le caractère ASCII au message décrypté
+        message_decrypte += caractere_ascii
+
+    # Retourner le message décrypté
+    return message_decrypte
 
 
+key = extraire_cle("rossignol2.bmp")
+print(key)
+
+message = "Bonjour, ceci est un message secret."
+print(message)
+
+encrypted_message = cryptage_aes(message, key)
+print(encrypted_message)
+
+decrypted_message = decrytpage_aes(encrypted_message, key)
+print(decrypted_message)
