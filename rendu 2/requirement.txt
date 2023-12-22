@@ -1,0 +1,6 @@
+opencv-python
+Pillow
+pycryptodome
+pycryptodome-test-vectors 
+pycryptodomex
+scapy

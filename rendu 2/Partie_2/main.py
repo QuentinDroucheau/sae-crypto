@@ -1,5 +1,6 @@
 import time
 from image_traitement import extraire_cle
+import time
 
 def fichier_to_texte(fichier):
     with open(fichier, 'r') as f:
@@ -81,22 +82,43 @@ print(key)
 
 message = fichier_to_texte("../Partie1/arsene_lupin_extrait.txt")
 
+start_time = time.time()
 crypt = cryptage_aes(message, key)
+end_time = time.time()
+execution_time = end_time - start_time
+print("Temps d'exécution pour le fichier arsene_lupin_extrait.txt :", execution_time, "secondes")
 print(crypt)
 
+start_time = time.time()
 print(decrytpage_aes(crypt, key))
-
-
-
+end_time = time.time()
+execution_time = end_time - start_time
+print("Temps d'exécution pour le décryptage du fichier arsene_lupin_extrait.txt :", execution_time, "secondes")
 
 message = fichier_to_texte("../Partie1/arsene_lupin_extrait.txt")
+start_time = time.time()
 crypt = cryptage_aes(message, key)
+end_time = time.time()
+execution_time = end_time - start_time
+print("Temps d'exécution pour le deuxième cryptage du fichier arsene_lupin_extrait.txt :", execution_time, "secondes")
 print(crypt)
 
+start_time = time.time()
 print(decrytpage_aes(crypt, key))
+end_time = time.time()
+execution_time = end_time - start_time
+print("Temps d'exécution pour le deuxième décryptage du fichier arsene_lupin_extrait.txt :", execution_time, "secondes")
 
 message2 = fichier_to_texte("../Partie1/lettres_persanes.txt")
+start_time = time.time()
 crypt2 = cryptage_aes(message2, key)
+end_time = time.time()
+execution_time = end_time - start_time
+print("Temps d'exécution pour le cryptage du fichier lettres_persanes.txt :", execution_time, "secondes")
 print(crypt2)
 
+start_time = time.time()
 print(decrytpage_aes(crypt2, key))
+end_time = time.time()
+execution_time = end_time - start_time
+print("Temps d'exécution pour le décryptage du fichier lettres_persanes.txt :", execution_time, "secondes")
