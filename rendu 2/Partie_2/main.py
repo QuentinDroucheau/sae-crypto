@@ -1,4 +1,10 @@
+import time
 from image_traitement import extraire_cle
+
+def fichier_to_texte(fichier):
+    with open(fichier, 'r') as f:
+        texte = f.read()
+    return texte
 
 def cryptage_aes(message, key):
     """
@@ -73,11 +79,24 @@ def decrytpage_aes(message,key):
 key = extraire_cle("rossignol2.bmp")
 print(key)
 
-message = "Bonjour, ceci est un message secret."
-print(message)
+message = fichier_to_texte("../Partie1/arsene_lupin_extrait.txt")
 
-encrypted_message = cryptage_aes(message, key)
-print(encrypted_message)
+crypt = cryptage_aes(message, key)
+print(crypt)
 
-decrypted_message = decrytpage_aes(encrypted_message, key)
-print(decrypted_message)
+print(decrytpage_aes(crypt, key))
+
+
+
+
+message = fichier_to_texte("../Partie1/arsene_lupin_extrait.txt")
+crypt = cryptage_aes(message, key)
+print(crypt)
+
+print(decrytpage_aes(crypt, key))
+
+message2 = fichier_to_texte("../Partie1/lettres_persanes.txt")
+crypt2 = cryptage_aes(message2, key)
+print(crypt2)
+
+print(decrytpage_aes(crypt2, key))
