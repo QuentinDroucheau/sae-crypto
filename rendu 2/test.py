@@ -2,15 +2,19 @@ from main import encrypt, decrypt
 
 # Fonction pour chiffrer un texte
 def chiffrer_texte(texte_clair, key):
-    texte_ascii = [ord(c) for c in texte_clair]  # Conversion du texte en ASCII
+    texte_ascii = []
+
+    for char in texte_clair:
+        texte_ascii.append(ord(char))
     texte_chiffre = [encrypt(key, char) for char in texte_ascii]  # Chiffrement caractère par caractère
     return texte_chiffre
 
 # Fonction pour déchiffrer un texte chiffré
 def dechiffrer_texte(texte_chiffre, key):
     texte_dechiffre = [decrypt(key, char) for char in texte_chiffre]  # Déchiffrement caractère par caractère
-    texte_clair = ''.join(chr(char) for char in texte_dechiffre)  # Conversion du texte ASCII déchiffré en texte
+    texte_clair = ''.join(chr(char) if isinstance(char, int) else char for char in texte_dechiffre)  # Conversion du texte ASCII déchiffré en texte
     return texte_clair
+
 
 # Test de chiffrement et déchiffrement
 def tester_chiffrement_dechiffrement():
@@ -27,7 +31,7 @@ def tester_chiffrement_dechiffrement():
     assert texte == texte_dechiffre, "Erreur : Le texte déchiffré ne correspond pas au texte clair original."
 
 # Appel de la fonction de test
-tester_chiffrement_dechiffrement()
+# tester_chiffrement_dechiffrement()
 
 
 # Convertir un fichier texte en une liste d'entiers ASCII
@@ -75,4 +79,48 @@ def tester_chiffrement_dechiffrement_fichiers():
 
    
 # Appel de la fonction de test pour les fichiers
-tester_chiffrement_dechiffrement_fichiers()
+# tester_chiffrement_dechiffrement_fichiers()
+
+
+# Fonction pour trouver la clé de chiffrement
+
+# Fonction pour trouver la clé de chiffrement
+def cassage_brutal_simple(message_clair, message_chiffre):
+    for i in range(1024):
+        key = bin(i)[2:].zfill(10)  # Formatage de la clé binaire sur 10 bits
+        texte_dechiffre = dechiffrer_texte(message_chiffre, int(key, 2))
+        if texte_dechiffre == message_clair:
+            return key
+    return None
+
+# Exemple d'utilisation de la fonction cassage_brutal
+message_clair = "Bonjour, ceci est un exemple de texte à chiffrer avec SDES."
+key = 0b1011110111
+message_chiffre = chiffrer_texte(message_clair, key)
+key = cassage_brutal_simple(message_clair, message_chiffre)
+
+print(dechiffrer_texte(message_chiffre, key))
+
+
+def cassage_brutal_double(message_clair, message_chiffre):
+    
+    for i in range(1024):
+        key1 = bin(i)[2:].zfill(10)
+        premier_chiffre = chiffrer_texte(message_clair, key1)
+        for j in range(1024):
+            key2 = bin(j)[2:].zfill(10)
+            deuxieme_chiffre = chiffrer_texte(premier_chiffre, key2)
+            if deuxieme_chiffre == message_chiffre:
+                return key1, key2
+            
+            
+            
+    return None
+
+# Exemple d'utilisation de la fonction cassage_brutal
+# message_clair = "Bonjour, ceci est un exemple de texte à chiffrer avec SDES."
+# key  = 0b1011110111
+# key1 = 0b1011000111
+# message_chiffre = chiffrer_texte(message_clair, key)
+# message_chiffre_double = chiffrer_texte(message_chiffre, key1)
+# print(cassage_brutal_double(message_clair, message_chiffre_double))
